@@ -1,0 +1,1 @@
+import{j as e}from"./index-DlAyuUCH.js";function r({children:s,showSidebar:a=!1}){return e.jsxs("div",{className:"flex h-screen p-2 gap-2",children:[a?e.jsx("aside",{className:"w-72 h-full bg-gray-900 text-white p-4",children:"Sidebar"}):null,e.jsx("main",{className:"flex-1 bg-gray-300 p-4",children:s})]})}export{r as L};

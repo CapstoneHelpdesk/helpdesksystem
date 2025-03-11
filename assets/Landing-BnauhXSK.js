@@ -1,0 +1,1 @@
+import{j as t}from"./index-DlAyuUCH.js";import{L as e}from"./Layout-CoL34VQ-.js";function a(){return t.jsx(e,{children:t.jsx("h1",{className:"text-3xl font-bold",children:"Welcome to the Landing Page"})})}export{a as default};
