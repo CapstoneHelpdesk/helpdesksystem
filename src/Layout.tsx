@@ -1,19 +1,37 @@
-import { ReactNode } from "react";
+import { useState, useEffect } from "react";
+import Navbar from "./components/Navbar";
+import Sidebar from "./components/Sidebar";
+import Mainbar from "./components/Mainbar";
 
-interface LayoutProps {
-  children: ReactNode;
-  showSidebar?: boolean;
-}
+function Layout() {
+  const [selectedNavbar, setSelectedNavbar] = useState("Dashboard");
+  const [selectedSidebar, setSelectedSidebar] = useState("Home");
 
-function Layout({ children, showSidebar = false }: LayoutProps) {
+  const defaultSidebarState: Record<string, string> = {
+    Dashboard: "Home",
+    Settings: "Profile",
+  };
+
+  useEffect(() => {
+    setSelectedSidebar(defaultSidebarState[selectedNavbar]);
+  }, [selectedNavbar]);
+
   return (
-    <div className="flex h-screen p-2 gap-2">
-      {showSidebar ? (
-        <aside className="w-72 h-full bg-gray-900 text-white p-4">
-          Sidebar
-        </aside>
-      ) : null}
-      <main className="flex-1 bg-gray-300 p-4">{children}</main>
+    <div className="flex h-screen w-full">
+      <div className="flex-1 flex flex-col">
+        <Navbar setSelectedNavbar={setSelectedNavbar} />
+        <div className="flex flex-1">
+          <Sidebar
+            selectedNavbar={selectedNavbar}
+            setSelectedSidebar={setSelectedSidebar}
+          />
+
+          <Mainbar
+            selectedNavbar={selectedNavbar}
+            selectedSidebar={selectedSidebar}
+          />
+        </div>
+      </div>
     </div>
   );
 }
