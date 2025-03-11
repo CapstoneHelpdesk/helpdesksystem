@@ -1,10 +1,33 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.tsx'
+import React, { lazy, Suspense } from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import "./index.css";
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+const App = lazy(() => import("./App"));
+const Landing = lazy(() => import("./components/Landing"));
+const Dashboard = lazy(() => import("./components/Dashboard"));
+
+const router = createBrowserRouter([
+  {
+    path: "/helpdesksystem/",
+    element: <App />,
+    children: [
+      { path: "landing", element: <Landing /> },
+      { path: "dashboard", element: <Dashboard /> },
+    ],
+  },
+]);
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <Suspense
+      fallback={
+        <div className="h-screen flex items-center justify-center text-lg font-bold">
+          Loading...
+        </div>
+      }
+    >
+      <RouterProvider router={router} />
+    </Suspense>
+  </React.StrictMode>
+);
