@@ -1,1 +1,0 @@
-import{j as r}from"./index-DlAyuUCH.js";import{L as o}from"./Layout-CoL34VQ-.js";function s(){return r.jsx(o,{showSidebar:!0,children:r.jsx("h1",{className:"text-3xl font-bold",children:"Dashboard"})})}export{s as default};
