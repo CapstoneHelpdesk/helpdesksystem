@@ -3,15 +3,24 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
 
-// const App = lazy(() => import("./App"));
+const App = lazy(() => import("./App"));
 const Layout = lazy(() => import("./Layout"));
+const DashboardAdmin = lazy(() => import("./components/DashboardAdmin"));
 // const Landing = lazy(() => import("./components/Landing"));
 // const Dashboard = lazy(() => import("./components/Dashboard"));
 
 const router = createBrowserRouter([
   {
     path: "/helpdesksystem/",
-    element: <Layout />,
+    element: <App />,
+    children: [
+      // { path: "landing", element: <Landing /> },
+      // { path: "dashboard", element: <Dashboard /> },
+    ],
+  },
+  {
+    path: "/helpdesksystem/dashadmin",
+    element: <DashboardAdmin />,
     children: [
       // { path: "landing", element: <Landing /> },
       // { path: "dashboard", element: <Dashboard /> },
