@@ -1,74 +1,144 @@
-// import Layout from "../Layout";
+import { useState, useEffect } from "react";
+import { FaRegQuestionCircle } from "react-icons/fa";
+import Navbar from "./Navbar";
 
-// function Landing() {
-//   return (
-//     <Layout>
-//       <div className="min-h-screen flex flex-col items-center justify-start bg-gradient-to-b from-blue-900 to-blue-300 p-4 rounded-md">
-//         {/* Navbar */}
-//         <div className="w-full max-w-4xl flex justify-between items-center py-4">
-//           <div className="w-20 h-8 bg-white rounded-md"></div>{" "}
-//           {/* Placeholder Logo */}
-//           <div className="space-x-4">
-//             <button className="px-4 py-2 text-blue-500 border border-blue-500 rounded-lg">
-//               Masuk
-//             </button>
-//             <button className="px-4 py-2 bg-blue-600 text-white rounded-lg">
-//               Daftar
-//             </button>
-//           </div>
-//         </div>
+function Landing() {
+  const [isTop, setIsTop] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [selected, setSelected] = useState("PENGADUAN");
+  const options = ["PENGADUAN", "PERMINTAAN INFORMASI", "SARAN"];
+  const [date, setDate] = useState("");
+  const [activeNavbar, setActiveNavbar] = useState(2);
 
-//         {/* Title */}
-//         <h1 className="text-white text-2xl font-semibold text-center mt-8">
-//           Layanan Aspirasi dan Pengaduan Online Rakyat
-//         </h1>
-//         <p className="text-white text-center text-sm">
-//           Sampaikan laporan Anda langsung kepada instansi pemerintah berwenang.
-//         </p>
+  const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedDate = e.target.value;
+    const today = new Date().toISOString().split("T")[0];
 
-//         {/* Card */}
-//         <div className="bg-white rounded-lg shadow-lg p-6 mt-6 w-full max-w-xl">
-//           <h2 className="text-lg font-semibold text-center">
-//             Sampaikan Laporan Anda
-//           </h2>
+    setDate(selectedDate > today ? today : selectedDate);
+  };
 
-//           {/* Pilihan Klasifikasi Laporan */}
-//           <div className="mt-4">
-//             <p className="text-sm font-medium">Pilih Klasifikasi Laporan</p>
-//             <div className="flex justify-between border border-gray-300 rounded-lg mt-2 overflow-hidden">
-//               <label className="flex items-center flex-1 justify-center py-3 cursor-pointer">
-//                 <input type="radio" name="kategori" className="hidden" />
-//                 <span className="text-blue-500 font-medium">PENGADUAN</span>
-//               </label>
-//               <label className="flex items-center flex-1 justify-center py-3 bg-blue-500 text-white font-medium cursor-pointer">
-//                 <input
-//                   type="radio"
-//                   name="kategori"
-//                   className="hidden"
-//                   defaultChecked
-//                 />
-//                 <span>PENGADUAN</span>
-//               </label>
-//               <label className="flex items-center flex-1 justify-center py-3 cursor-pointer">
-//                 <input type="radio" name="kategori" className="hidden" />
-//                 <span className="text-blue-500 font-medium">
-//                   PERMINTAAN INFORMASI
-//                 </span>
-//               </label>
-//             </div>
-//           </div>
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
 
-//           {/* Panduan */}
-//           <p className="text-xs text-gray-500 mt-3 text-center">
-//             Perhatikan Cara Menyampaikan Pengaduan Yang Baik dan Benar{" "}
-//             <a href="#" className="text-blue-500 underline">
-//               Lihat Panduan
-//             </a>
-//           </p>
-//         </div>
-//       </div>
-//     </Layout>
-//   );
-// }
+      setIsTop(currentScrollY <= 10);
 
-// export default Landing;
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+  return (
+    <div className="w-full h-[100vh] bg-gradient-to-b from-[#084a83] to-[#FFFFFF] flex flex-col items-center">
+      {/*Navbar*/}
+      <Navbar activeNavbar={activeNavbar} setActiveNavbar={setActiveNavbar} />
+
+      {/*Content Area*/}
+      <div className="w-full min-w-[320px] max-w-[1140px] h-[64px] bg-transparent flex flex-col items-center">
+        {/* -intro */}
+        <div className="w-full px-[32px] py-40 bg-transparent flex flex-col gap-4 items-center shadow-lg rounded-[32px]">
+          <h1 className="w-full text-4xl text-white font-medium text-center">
+            Layanan Aspirasi dan Pengaduan Online Rakyat
+          </h1>
+          <h2 className="w-full text-2xl text-white text-center">
+            Sampaikan laporan Anda langsung kepada instansi pemerintah berwenang
+          </h2>
+          <div
+            className={`mt-[16px] h-[8px] bg-white rounded-b-[32px] shadow-lg transition-all duration-300 ${
+              isTop ? "w-[160px]" : "w-[80px]"
+            }`}
+          ></div>
+        </div>
+
+        {/* -form */}
+        <div className="-mt-[96px] w-full min-w-[288px] max-w-[1000px] p-8 bg-white rounded-4xl flex flex-wrap gap-8 items-center shadow-md">
+          <h1 className="w-full text-2xl text-[#084a83] font-medium text-center">
+            Sampaikan Laporan Anda
+          </h1>
+          {/* --lasifikasi laporan  */}
+          <div className="w-full flex flex-col gap-2">
+            <p className="w-full text-sm font-medium">
+              Pilih Klasifikasi Laporan
+            </p>
+            <div className="w-full border-2 border-[#084A83] rounded-[8px] overflow-hidden grid grid-cols-3 max-[768px]:grid-cols-1 max-[768px]:grid-rows-3">
+              {options.map((option) => (
+                <label
+                  key={option}
+                  className={`flex items-center p-4 cursor-pointer text-[#084A83] font-bold text-sm transition duration-300 ease-in-out ${
+                    selected === option
+                      ? "bg-[#084A83] text-white"
+                      : "bg-white hover:bg-[#084A83]/15"
+                  }`}
+                >
+                  <input
+                    type="checkbox"
+                    checked={selected === option}
+                    onChange={() => setSelected(option)}
+                    className="hidden"
+                  />
+                  <div
+                    className={`w-5 h-5 flex items-center justify-center border-2 rounded-sm mr-3 ${
+                      selected === option
+                        ? "bg-white border-white"
+                        : "border-gray-400"
+                    }`}
+                  >
+                    {selected === option && (
+                      <div className="w-3 h-3 bg-[#084A83] rounded-sm"></div>
+                    )}
+                  </div>
+                  {option}
+                </label>
+              ))}
+            </div>
+          </div>
+          <div className="w-full px-4 flex gap-2 justify-center items-center">
+            <p className="text-sm font-medium text-center">
+              Perhatikan Cara Menyampaikan Pengaduan Yang Baik dan Benar
+            </p>
+            <a href="">
+              <FaRegQuestionCircle className="text-[#084A83] text-" />
+            </a>
+          </div>
+          <div className="w-full flex flex-col gap-4">
+            <div className="w-full flex flex-col gap-2 group">
+              <p className="text-sm font-medium group-focus-within:text-[#084A83]">
+                Judul Laporan
+              </p>
+              <input
+                type="text"
+                className="w-full border-2 px-4 py-2 rounded-[8px] hover:border-[#084A83]/50 focus:border-[#084A83] text-sm outline-none bg-transparent"
+                placeholder="Masukkan judul laporan"
+              />
+            </div>
+            <div className="w-full flex flex-col gap-2 group">
+              <p className="w-full text-sm font-medium group-focus-within:text-[#084A83]">
+                Isi Laporan
+              </p>
+              <input
+                type="text"
+                className="w-full border-2 px-4 py-2 rounded-[8px] hover:border-[#084A83]/50 focus:border-[#084A83] text-sm outline-none bg-transparent"
+                placeholder="Masukkan judul laporan"
+              />
+            </div>
+            <div className="w-full flex flex-col gap-2 group">
+              <p className="text-sm font-medium group-focus-within:text-[#084A83]">
+                Tanggal Kejadian
+              </p>
+              <input
+                type="date"
+                className="w-full border-2 px-4 py-2 rounded-[8px] hover:border-[#084A83]/50 focus:border-[#084A83] text-sm outline-none bg-transparent cursor-text"
+                value={date}
+                onChange={handleDateChange}
+                max={new Date().toISOString().split("T")[0]} // Mencegah pemilihan tanggal masa depan di kalender
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Landing;
