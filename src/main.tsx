@@ -7,6 +7,7 @@ import "./index.css";
 // const Layout = lazy(() => import("./Layout"));
 const DashboardAdmin = lazy(() => import("./components/DashboardAdmin"));
 const Landing = lazy(() => import("./components/Landing"));
+const DashUser = lazy(() => import("./components/DashboardUser"));
 
 // const Dashboard = lazy(() => import("./components/Dashboard"));
 
@@ -14,10 +15,10 @@ const router = createBrowserRouter([
   {
     path: "/helpdesksystem/",
     element: <Landing />,
-    children: [
-      // { path: "landing", element: <Landing /> },
-      // { path: "dashboard", element: <Dashboard /> },
-    ],
+  },
+  {
+    path: "/helpdesksystem/dashuser",
+    element: <DashUser />,
   },
   {
     path: "/helpdesksystem/dashadmin",
