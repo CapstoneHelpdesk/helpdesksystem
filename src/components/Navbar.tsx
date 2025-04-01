@@ -55,7 +55,7 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
       icon: <FaClock />,
       color: "#D2B335",
       hasCount: true,
-      isNew: true,
+      isNew: false,
     },
     {
       label: "Selesai",
@@ -85,7 +85,15 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
     onClick: () => void;
     newClass?: string;
   }) => {
-    return (
+    const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 701);
+
+    useEffect(() => {
+      const handleResize = () => setIsDesktop(window.innerWidth >= 701);
+      window.addEventListener("resize", handleResize);
+      return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+    return isDesktop ? (
       <button
         onClick={onClick}
         className={`relative py-2 flex flex-row gap-3 items-center cursor-pointer transition-all duration-300 group 
@@ -125,6 +133,48 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
         <span
           className={`absolute bottom-[-1px] w-full h-[3px] bg-[var(--color)] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 
           ${isActive ? "scale-x-100" : "scale-x-0"}`}
+        ></span>
+      </button>
+    ) : (
+      <button
+        onClick={onClick}
+        className={`relative py-2 flex flex-col items-center cursor-pointer transition-all duration-300 group 
+      ${
+        isActive ? "text-[var(--color)] scale-95" : "text-gray-700"
+      } ${newClass}`}
+        style={{ "--color": color } as React.CSSProperties}
+      >
+        <div className="flex flex-row gap-2 items-center">
+          {icon && (
+            <span
+              className={`text-lg group-hover:text-[var(--color)] transition-all duration-300 ${
+                isActive ? "text-[var(--color)]" : ""
+              }`}
+            >
+              {icon}
+            </span>
+          )}
+          {count !== undefined && (
+            <p className="text-base font-semibold flex flex-row items-center">
+              {count}
+              {isNew && (
+                <span className="ml-2 bg-[var(--color)] text-white text-xs px-2 py-[2px] rounded-full">
+                  baru
+                </span>
+              )}
+            </p>
+          )}
+        </div>
+        <p
+          className={`text-sm font-medium group-hover:text-[var(--color)] transition-all duration-300 ${
+            isActive ? "text-[var(--color)]" : ""
+          }`}
+        >
+          {label}
+        </p>
+        <span
+          className={`absolute bottom-[-1px] w-full h-[3px] bg-[var(--color)] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 
+        ${isActive ? "scale-x-100" : "scale-x-0"}`}
         ></span>
       </button>
     );
@@ -314,7 +364,7 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
               </div>
             </div>
           </div>
-          <div className="fixed bottom-1 right-1 flex flex-row min-[441px]:hidden transition-all duration-300">
+          <div className="fixed bottom-[72px] right-1 items-center justify-center min-[441px]:hidden transition-all duration-300">
             <a
               href=""
               className={`h-[44px] px-4 py-2 bg-[#3D8BFD] border-2 border-[#3D8BFD] rounded-[8px] text-white flex gap-3 items-center hover:bg-white hover:border-2 transition-all duration-300 group ${
@@ -332,6 +382,31 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
                 Buat Laporan
               </p>
             </a>
+          </div>
+          <div className="fixed w-full pb-2 bottom-0 bg-white min-[701px]:hidden transition-all duration-300">
+            <div className="w-full flex flex-row items-center justify-center">
+              {TabStatusList.map((TabUmum) => {
+                const count = TabUmum.hasCount
+                  ? tickets.filter((ticket) => ticket.status === TabUmum.label)
+                      .length
+                  : undefined;
+
+                return (
+                  <TabMenu
+                    key={TabUmum.label}
+                    icon={TabUmum.icon || null}
+                    label={TabUmum.label}
+                    color={TabUmum.color}
+                    isActive={activeStatus === TabUmum.label}
+                    onClick={() => setActiveStatus(TabUmum.label)}
+                    newClass="w-[120px]"
+                    {...(TabUmum.hasCount
+                      ? { count, isNew: TabUmum.isNew }
+                      : {})}
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
       )}
