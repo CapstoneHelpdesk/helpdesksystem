@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaRegQuestionCircle, FaPencilAlt } from "react-icons/fa";
+import { FaRegQuestionCircle } from "react-icons/fa";
 import Navbar from "./Navbar";
 
 function DashboardUser() {
