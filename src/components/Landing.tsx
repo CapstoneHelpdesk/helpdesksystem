@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FaRegQuestionCircle } from "react-icons/fa";
 import Navbar from "./Navbar";
 
 function Landing() {
   const [isTop, setIsTop] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  const lastScrollY = useRef(0);
   const [selected, setSelected] = useState("PENGADUAN");
   const options = ["PENGADUAN", "PERMINTAAN INFORMASI", "SARAN"];
   const [date, setDate] = useState("");
@@ -16,19 +16,26 @@ function Landing() {
 
     setDate(selectedDate > today ? today : selectedDate);
   };
-
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
-      const currentScrollY = window.scrollY;
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
 
-      setIsTop(currentScrollY <= 10);
+          setIsTop(currentScrollY <= 10);
+          lastScrollY.current = currentScrollY;
 
-      setLastScrollY(currentScrollY);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+  }, []);
   return (
     <div className="w-full h-[100vh] bg-gradient-to-b from-[#084a83] to-[#FFFFFF] flex flex-col items-center">
       {/*Navbar*/}
