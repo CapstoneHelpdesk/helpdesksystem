@@ -88,7 +88,7 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
     return (
       <button
         onClick={onClick}
-        className={`relative w-[120px] px-2.5 py-2 flex flex-row gap-3 items-center cursor-pointer transition-all duration-300 group 
+        className={`relative py-2 flex flex-row gap-3 items-center cursor-pointer transition-all duration-300 group 
         ${
           isActive ? "text-[var(--color)] scale-95" : "text-gray-700"
         } ${newClass}`}
@@ -199,101 +199,139 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
       )}
 
       {activeNavbar === 2 && (
-        <div
-          className={`fixed w-full h-fit pt-2 bg-[#084a83]/30 flex flex-col gap-2 items-center backdrop-blur-[5px] shadow-lg transition-all duration-300 ${
-            showNavbar ? "-translate-y-[0%]" : "-translate-y-[28%]"
-          }`}
-        >
+        <div className="w-full bg-white shadow-md flex flex-col justify-between">
           <div
-            className={`w-full min-w-[320px] max-w-[1148px] h-fit px-8 bg-transparent flex gap-4 justify-between items-center transition-all duration-300 ${
-              showNavbar ? "opacity-100 scale-100" : "opacity-0 scale-95"
+            className={`fixed w-full h-fit pt-2 bg-[#084a83]/30 flex flex-col gap-2 items-center backdrop-blur-[5px] shadow-lg transition-all duration-300 ${
+              showNavbar
+                ? "-translate-y-[0%]"
+                : "-translate-y-[30%] max-[701px]:-translate-y-[43%] max-[441px]:-translate-y-[46%]"
             }`}
           >
-            <a
-              href=""
-              className="w-[140px] h-12 bg-white rounded-2xl max-[320px]:w-[70px]"
-            ></a>
-            <input
-              type="text"
-              className="w-full max-w-[720px] border-2 px-4 py-2 bg-[#084a83] rounded-3xl shadow-[0_0_15px_rgba(255,255,255,0.5)] border-white text-sm outline-none placeholder-white text-white transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,255,255,1)] hover:border-[rgba(255,255,255,1)] focus:shadow-[0_0_15px_rgba(255,255,255,1)] focus:border-[rgba(255,255,255,1)]"
-              placeholder="Search id / content / reporter"
-            />
-            <div className="w-fit h-full flex gap-4 items-center">
-              <button
-                className="w-fit h-full flex items-center bg-yellow-500 px-4 py-2"
-                onClick={() => setActiveNavbar(1)}
-              >
-                Nav1
-              </button>
-              <div className="w-fit h-full flex items-center">
-                <a
-                  href=""
-                  className="w-8 h-8 bg-[#3D8BFD] rounded-2xl hover:bg-white transition-all duration-300 group"
-                ></a>
-                <a
-                  href=""
-                  className="w-8 h-8 bg-[#3D8BFD] rounded-2xl hover:bg-white transition-all duration-300 group hidden md:block"
-                ></a>
+            <div
+              className={`w-full min-w-[320px] max-w-[1148px] h-fit px-8 bg-transparent flex gap-4 justify-between items-center transition-all duration-300 ${
+                showNavbar ? "opacity-100 scale-100" : "opacity-0 scale-95"
+              }`}
+            >
+              <a
+                href=""
+                className="w-[140px] h-12 bg-white rounded-2xl max-[320px]:w-[70px]"
+              ></a>
+              <input
+                type="text"
+                className="w-full max-w-[720px] border-2 px-4 py-2 bg-white rounded-3xl shadow-[0_0_15px_rgba(255,255,255,0.5)] text-sm outline-none text-black transition-all duration-300 hover:shadow-[0_0_15px_rgba(255,255,255,1)] hover:border-[#084A83]/50 focus:shadow-[0_0_15px_rgba(255,255,255,1)] focus:border-[#084A83]"
+                placeholder="Search id / content / reporter"
+                onFocus={(e) => e.target.select()}
+              />
+              <div className="w-fit h-full flex gap-4 items-center">
+                <button
+                  className="w-fit h-full flex items-center bg-yellow-500 px-4 py-2"
+                  onClick={() => setActiveNavbar(1)}
+                >
+                  Nav1
+                </button>
+                <div className="w-fit h-full flex items-center">
+                  <a
+                    href=""
+                    className="w-8 h-8 bg-[#3D8BFD] rounded-2xl hover:bg-white transition-all duration-300 group"
+                  ></a>
+                  <a
+                    href=""
+                    className="w-8 h-8 bg-[#3D8BFD] rounded-2xl hover:bg-white transition-all duration-300 group hidden md:block"
+                  ></a>
+                </div>
+              </div>
+            </div>
+            <div className="w-full min-w-[320px] max-w-[1148px] bg-transparent flex gap-4 items-center">
+              <div className="w-full px-4 pt-4 bg-white rounded-t-2xl flex flex-col max-[321px]:grid-rows-1">
+                <div className="w-full h-fit flex flex-row items-center justify-between max-[701px]:hidden">
+                  <div className="text-2xl font-medium">LAPORAN</div>
+                  <a
+                    href=""
+                    className="w-fit h-fit px-4 py-2 bg-[#3D8BFD] border-2 border-[#3D8BFD] rounded-[8px] hover:bg-white hover:border-2 transition-all duration-300 group"
+                  >
+                    <p className="text-base text-white font-medium flex gap-3 items-center group-hover:text-[#3D8BFD]">
+                      <span className="text-lg">
+                        <FaPencilAlt />
+                      </span>
+                      Buat Laporan
+                    </p>
+                  </a>
+                </div>
+                <div className="w-full h-fit flex flex-row justify-between max-[441px]:justify-center max-[769px]:pb-2">
+                  <div className="flex flex-row">
+                    {TabUmumList.map((TabUmum) => {
+                      return (
+                        <TabMenu
+                          key={TabUmum.label}
+                          icon={TabUmum.icon || null}
+                          label={TabUmum.label}
+                          color={TabUmum.color}
+                          isActive={activeStatus === TabUmum.label}
+                          onClick={() => setActiveStatus(TabUmum.label)}
+                          newClass="w-fit px-2.5 justify-center"
+                        />
+                      );
+                    })}
+                  </div>
+                  <div className="flex flex-row max-[701px]:hidden">
+                    {TabStatusList.map((TabUmum) => {
+                      const count = TabUmum.hasCount
+                        ? tickets.filter(
+                            (ticket) => ticket.status === TabUmum.label
+                          ).length
+                        : undefined;
+
+                      return (
+                        <TabMenu
+                          key={TabUmum.label}
+                          icon={TabUmum.icon || null}
+                          label={TabUmum.label}
+                          color={TabUmum.color}
+                          isActive={activeStatus === TabUmum.label}
+                          onClick={() => setActiveStatus(TabUmum.label)}
+                          newClass="w-[120px]"
+                          {...(TabUmum.hasCount
+                            ? { count, isNew: TabUmum.isNew }
+                            : {})}
+                        />
+                      );
+                    })}
+                  </div>
+                  <div className="flex flex-row min-[701px]:hidden max-[441px]:hidden">
+                    <a
+                      href=""
+                      className="w-fit h-fit px-4 py-2 bg-[#3D8BFD] border-2 border-[#3D8BFD] rounded-[8px] hover:bg-white hover:border-2 transition-all duration-300 group"
+                    >
+                      <p className="text-base text-white font-medium flex gap-3 items-center group-hover:text-[#3D8BFD]">
+                        <span className="text-lg">
+                          <FaPencilAlt />
+                        </span>
+                        Buat Laporan
+                      </p>
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div className="w-full min-w-[320px] max-w-[1148px] bg-transparent flex gap-4 items-center">
-            <div className="w-full px-4 pt-4 bg-white rounded-t-2xl grid grid-rows-2 ">
-              <div className="w-full h-fit flex flex-row items-center justify-between">
-                <div className="text-2xl font-medium">LAPORAN</div>
-                <a
-                  href=""
-                  className="w-fit px-6 py-3 bg-[#3D8BFD] border-2 border-[#3D8BFD] rounded-[8px] hover:bg-white hover:border-2 transition-all duration-300 group"
-                >
-                  <p className="text-base text-white font-medium flex gap-3 items-center group-hover:text-[#3D8BFD]">
-                    <span className="text-lg">
-                      <FaPencilAlt />
-                    </span>{" "}
-                    Buat Laporan
-                  </p>
-                </a>
-              </div>
-              <div className="w-full h-fit flex flex-row justify-between">
-                <div className="flex flex-row">
-                  {TabUmumList.map((TabUmum) => {
-                    return (
-                      <TabMenu
-                        key={TabUmum.label}
-                        icon={TabUmum.icon || null}
-                        label={TabUmum.label}
-                        color={TabUmum.color}
-                        isActive={activeStatus === TabUmum.label}
-                        onClick={() => setActiveStatus(TabUmum.label)}
-                        newClass="justify-center"
-                      />
-                    );
-                  })}
-                </div>
-                <div className="flex flex-row">
-                  {TabStatusList.map((TabUmum) => {
-                    const count = TabUmum.hasCount
-                      ? tickets.filter(
-                          (ticket) => ticket.status === TabUmum.label
-                        ).length
-                      : undefined;
-
-                    return (
-                      <TabMenu
-                        key={TabUmum.label}
-                        icon={TabUmum.icon || null}
-                        label={TabUmum.label}
-                        color={TabUmum.color}
-                        isActive={activeStatus === TabUmum.label}
-                        onClick={() => setActiveStatus(TabUmum.label)}
-                        {...(TabUmum.hasCount
-                          ? { count, isNew: TabUmum.isNew }
-                          : {})}
-                      />
-                    );
-                  })}
-                </div>
-              </div>
-            </div>
+          <div className="fixed bottom-1 right-1 flex flex-row min-[441px]:hidden transition-all duration-300">
+            <a
+              href=""
+              className={`h-[44px] px-4 py-2 bg-[#3D8BFD] border-2 border-[#3D8BFD] rounded-[8px] text-white flex gap-3 items-center hover:bg-white hover:border-2 transition-all duration-300 group ${
+                showNavbar ? "w-[163px]" : "w-[53px] "
+              }`}
+            >
+              <span className="text-lg">
+                <FaPencilAlt />
+              </span>
+              <p
+                className={`text-base text-white font-medium items-center whitespace-nowrap group-hover:text-[#3D8BFD] transition-all duration-300 ${
+                  showNavbar ? "block" : "hidden"
+                }`}
+              >
+                Buat Laporan
+              </p>
+            </a>
           </div>
         </div>
       )}

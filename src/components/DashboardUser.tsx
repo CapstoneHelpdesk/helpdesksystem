@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FaRegQuestionCircle } from "react-icons/fa";
+import { FaRegQuestionCircle, FaPencilAlt } from "react-icons/fa";
 import Navbar from "./Navbar";
 
 function DashboardUser() {
@@ -21,7 +21,7 @@ function DashboardUser() {
       <Navbar activeNavbar={activeNavbar} setActiveNavbar={setActiveNavbar} />
 
       {/*Content Area*/}
-      <div className="w-full min-w-[320px] max-w-[1148px] pt-[192px] bg-transparent flex flex-col items-center">
+      <div className="w-full min-w-[320px] max-w-[1148px] pt-[184px] bg-transparent flex flex-col items-center max-[769px]:pt-[192px] max-[701px]:pt-[132px] max-[441px]:pt-[124px]">
         {/* -form */}
         <div className="w-full min-w-[288px] max-w-[1148px] p-8 bg-white rounded-b-4xl flex flex-wrap gap-8 items-center shadow-md">
           <h1 className="w-full text-2xl text-[#084a83] font-medium text-center">
