@@ -165,13 +165,23 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
             </p>
           )}
         </div>
-        <p
-          className={`text-sm font-medium group-hover:text-[var(--color)] transition-all duration-300 ${
-            isActive ? "text-[var(--color)]" : ""
-          }`}
-        >
-          {label}
-        </p>
+        {icon ? (
+          <p
+            className={`text-sm font-medium group-hover:text-[var(--color)] transition-all duration-300 ${
+              isActive ? "text-[var(--color)]" : ""
+            } ${showNavbar ? "block" : "hidden"}`}
+          >
+            {label}
+          </p>
+        ) : (
+          <p
+            className={`text-sm font-medium group-hover:text-[var(--color)] transition-all duration-300 ${
+              isActive ? "text-[var(--color)]" : ""
+            } `}
+          >
+            {label}
+          </p>
+        )}
         <span
           className={`absolute bottom-[-1px] w-full h-[3px] bg-[var(--color)] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 
         ${isActive ? "scale-x-100" : "scale-x-0"}`}
@@ -364,7 +374,11 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
               </div>
             </div>
           </div>
-          <div className="fixed bottom-[72px] right-1 items-center justify-center min-[441px]:hidden transition-all duration-300">
+          <div
+            className={`fixed right-1 items-center justify-center min-[441px]:hidden transition-all duration-300 ${
+              showNavbar ? "bottom-[72px]" : "bottom-[52px]"
+            }`}
+          >
             <a
               href=""
               className={`h-[44px] px-4 py-2 bg-[#3D8BFD] border-2 border-[#3D8BFD] rounded-[8px] text-white flex gap-3 items-center hover:bg-white hover:border-2 transition-all duration-300 group ${
@@ -383,7 +397,11 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
               </p>
             </a>
           </div>
-          <div className="fixed w-full pb-2 bottom-0 bg-white min-[701px]:hidden transition-all duration-300">
+          <div
+            className={`fixed w-full pb-2 bottom-0 bg-white min-[701px]:hidden transition-all duration-300 ${
+              showNavbar ? "h-[68px]" : "h-[48px]"
+            }`}
+          >
             <div className="w-full flex flex-row items-center justify-center">
               {TabStatusList.map((TabUmum) => {
                 const count = TabUmum.hasCount
