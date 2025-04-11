@@ -8,7 +8,7 @@ function Landing() {
   const [selected, setSelected] = useState("PENGADUAN");
   const options = ["PENGADUAN", "PERMINTAAN INFORMASI", "SARAN"];
   const [date, setDate] = useState("");
-  const [activeNavbar, setActiveNavbar] = useState(2);
+  const [activeNavbar, setActiveNavbar] = useState(1);
 
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedDate = e.target.value;

@@ -103,10 +103,10 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
 
             <a
               href=""
-              className="w-fit bg-[#3D8BFD] px-[24px] py-[12px] rounded-[8px] hover:bg-white transition-all duration-300 group"
+              className="w-fit h-fit px-4 py-2 bg-[#3D8BFD] rounded-[8px] hover:bg-white transition-all duration-300 group"
             >
               <p className="text-base text-white font-medium group-hover:text-[#3D8BFD]">
-                MASUK
+                Masuk
               </p>
             </a>
           </div>
