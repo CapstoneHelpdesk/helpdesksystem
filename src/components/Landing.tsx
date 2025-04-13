@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { FaRegQuestionCircle } from "react-icons/fa";
-import Navbar from "./Navbar";
+import Button from "./Button.js";
+import Navbar from "./Navbar.js";
 
 function Landing() {
   const [isTop, setIsTop] = useState(true);
@@ -8,7 +9,7 @@ function Landing() {
   const [selected, setSelected] = useState("PENGADUAN");
   const options = ["PENGADUAN", "PERMINTAAN INFORMASI", "SARAN"];
   const [date, setDate] = useState("");
-  const [activeNavbar, setActiveNavbar] = useState(1);
+  const [activeNavbar, setActiveNavbar] = useState(2);
 
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedDate = e.target.value;
@@ -36,6 +37,9 @@ function Landing() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  const handleclick = () => {
+    alert("Click");
+  };
   return (
     <div className="w-full h-[100vh] bg-gradient-to-b from-[#084a83] to-[#FFFFFF] flex flex-col items-center">
       {/*Navbar*/}
@@ -84,6 +88,7 @@ function Landing() {
                     onChange={() => setSelected(option)}
                     className="hidden"
                   />
+
                   <div
                     className={`w-5 h-5 flex items-center justify-center border-2 rounded-sm mr-3 ${
                       selected === option
@@ -141,6 +146,12 @@ function Landing() {
                 max={new Date().toISOString().split("T")[0]} // Mencegah pemilihan tanggal masa depan di kalender
               />
             </div>
+            <Button
+              text="Submite"
+              onClick={handleclick}
+              type="submit"
+              className=""
+            />
           </div>
         </div>
       </div>
