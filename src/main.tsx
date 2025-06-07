@@ -12,20 +12,20 @@ const DashUser = lazy(() => import("./components/DashboardUser"));
 
 const router = createBrowserRouter([
   {
-    path: "/helpdesksystem/",
+    path: "/warungneojapan/",
     element: <Landing />,
   },
   {
-    path: "/helpdesksystem/dashuser",
+    path: "/warungneojapan/dashuser",
     element: <DashUser />,
   },
   // {
-   //  path: "/helpdesksystem/dashadmin",
-    // element: <DashboardAdmin />,
-    // children: [
-      // { path: "landing", element: <Landing /> },
-      // { path: "dashboard", element: <Dashboard /> },
-    // ],
+  //  path: "/warungneojapan/dashadmin",
+  // element: <DashboardAdmin />,
+  // children: [
+  // { path: "landing", element: <Landing /> },
+  // { path: "dashboard", element: <Dashboard /> },
+  // ],
   // },
 ]);
 
