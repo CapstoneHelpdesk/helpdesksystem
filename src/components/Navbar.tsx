@@ -146,14 +146,17 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
               </div>
               <div className="w-fit h-full flex gap-4 items-center max-[441px]:hidden">
                 <div className="w-fit h-full flex items-center">
+                  <a href="" className="w-6 h-6 bg-white flex items-center">
+                    <FaBell className="w-8 h-6" />
+                  </a>
                   <a
                     href=""
-                    className="w-8 h-8 bg-[#3D8BFD] rounded-2xl hover:bg-white transition-all duration-300 group"
+                    className="w-8 h-8 bg-[#3D8BFD] rounded-[8px] hover:bg-white transition-all duration-300 group"
                   ></a>
                 </div>
               </div>
             </div>
-            <div className="w-full min-w-[320px] max-w-[1148px] bg-transparent flex gap-4 items-center">
+            {/* <div className="w-full min-w-[320px] max-w-[1148px] bg-transparent flex gap-4 items-center">
               <div className="w-full px-4 pt-4 bg-white rounded-t-2xl flex flex-col max-[321px]:grid-rows-1">
                 <div className="w-full h-fit flex flex-row items-center justify-between max-[701px]:hidden">
                   <div className="text-2xl font-medium">LAPORAN</div>
@@ -224,7 +227,7 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
           <div
             className={`fixed right-1 items-center justify-center min-[441px]:hidden transition-all duration-300 ${

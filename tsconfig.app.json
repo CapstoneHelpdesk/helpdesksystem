@@ -10,6 +10,7 @@
     "skipLibCheck": true,
 
     /* Bundler mode */
+    "esModuleInterop": true,
     "moduleResolution": "Node",
     "isolatedModules": true,
     "moduleDetection": "force",

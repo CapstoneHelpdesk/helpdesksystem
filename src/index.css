@@ -1,8 +1,85 @@
+/* ✅ HARUS di baris pertama (kecuali @charset atau @layer) */
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&display=swap");
 @import "tailwindcss";
 
-/* @plugin "tailwindcss-animate";
+/* Setelah itu baru custom class */
+.font-bebas {
+  font-family: "Bebas Neue", sans-serif;
+}
 
-@custom-variant dark (&:is(.dark *)); */
+.font-anton {
+  font-family: "Anton", sans-serif;
+}
+
+.font-google-button {
+  font-family: "Google Sans", Roboto, Arial, sans-serif;
+  font-weight: 500;
+}
+
+.outline-green {
+  -webkit-text-stroke: 1.5px #40573a;
+  color: #f09f0a;
+}
+
+.custom-outline {
+  -webkit-text-stroke: 1.5px #40573a;
+  color: #f09f0a;
+}
+
+@media (max-width: 1024px) {
+  .custom-outline {
+    -webkit-text-stroke: 1px #40573a;
+  }
+}
+.outline-white {
+  -webkit-text-stroke: 1.5px #ffffff;
+  color: #000000;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee 20s linear infinite;
+}
+
+@keyframes marquee-vertical {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.animate-marquee-vertical {
+  animation: marquee-vertical 10s linear infinite;
+}
+
+@keyframes grow-bar {
+  from {
+    width: 0;
+  }
+  to {
+    width: var(--bar-width);
+  }
+}
+
+.animate-bar {
+  animation: grow-bar 1.2s ease-out forwards;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
 
 .layout {
   width: 100%;
