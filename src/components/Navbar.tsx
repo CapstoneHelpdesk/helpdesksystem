@@ -26,23 +26,23 @@ function Navbar({ activeNavbar, setActiveNavbar }: NavbarProps) {
     { id: 4, status: "Diproses", title: "Tiket 4" },
   ];
 
-  const TabUmumList = [
-    {
-      label: "Semua",
-      icon: null,
-      color: "#3D8BFD",
-    },
-    {
-      label: "Kawalan",
-      icon: null,
-      color: "#3D8BFD",
-    },
-    {
-      label: "Terhangat",
-      icon: null,
-      color: "#3D8BFD",
-    },
-  ];
+  // const TabUmumList = [
+  //   {
+  //     label: "Semua",
+  //     icon: null,
+  //     color: "#3D8BFD",
+  //   },
+  //   {
+  //     label: "Kawalan",
+  //     icon: null,
+  //     color: "#3D8BFD",
+  //   },
+  //   {
+  //     label: "Terhangat",
+  //     icon: null,
+  //     color: "#3D8BFD",
+  //   },
+  // ];
 
   const TabStatusList = [
     {
